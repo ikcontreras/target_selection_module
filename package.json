@@ -4,6 +4,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/app.ts",
+    "build": "node esbuild.config.js",
+    "start": "node dist/target_selection_module.js",
     "test": "bash tests/tests.sh"
   },
   "keywords": [],
@@ -12,6 +14,7 @@
   "description": "",
   "devDependencies": {
     "@types/express": "^5.0.1",
+    "esbuild": "^0.25.2",
     "tsx": "^4.19.3"
   },
   "dependencies": {
