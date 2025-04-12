@@ -2,6 +2,7 @@ import express, { NextFunction, Response, Request } from "express";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import { log } from "./utils/logger";
+import { routes } from "./routes";
 
 dotenv.config();
 
@@ -12,6 +13,14 @@ const format =
   "[HTTP][INFO] [:date[iso]] :method :url :status - :response-time ms";
 
 const port = process.env.PORT || 8888;
+
+app.use(express.json());
+
+app.use(morgan(format));
+
+routes.forEach((route) => {
+  app[route.method](route.path, route.controller);
+});
 
 app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
   log.error(
@@ -26,10 +35,6 @@ app.use(function (req, res) {
   res.status(404);
   res.send({ error: "Not found" });
 });
-
-app.use(express.json());
-
-app.use(morgan(format));
 
 app.listen(port, () => {
   log.info("Initializing YVH target selection module...");
