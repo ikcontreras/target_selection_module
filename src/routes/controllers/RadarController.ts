@@ -1,22 +1,28 @@
 import { Request, Response } from "express";
 import { RadarPayload, RadarResponse } from "@types";
-import { protocolStrategies } from "@protocols";
+import { log } from "@utils";
+import { RadarService } from "../services/RadarService";
 
-export function RadarController(
+export function TargetSelectionController(
   req: Request<unknown, unknown, RadarPayload>,
   res: Response<RadarResponse>,
 ) {
-  let positions = req.body.scan;
+  log.info("Initializing communication protocol...");
 
-  req.body.protocols.forEach((protocol) => {
-    const protocolStrategy = protocolStrategies.find((pf) =>
-      pf().condition(protocol),
-    );
-    if (protocolStrategy) positions = protocolStrategy().execute(positions);
-  });
+  const positions = RadarService().getCoordinates(req.body);
+
+  log.info(
+    `Target selected at (${positions.coordinates.x}, ${positions.coordinates.y}).`,
+  );
 
   res.send({
-    x: positions[0].coordinates.x,
-    y: positions[0].coordinates.y,
+    x: positions.coordinates.x,
+    y: positions.coordinates.y,
   });
+}
+
+export function RadarController() {
+  return {
+    targetSelection: TargetSelectionController,
+  };
 }

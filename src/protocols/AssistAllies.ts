@@ -1,5 +1,4 @@
 import { Protocol, ScanPosition, TargetPrioritizationStrategy } from "@types";
-import { limitCoordinatesToRange } from "@utils";
 
 export function AssistAllies(positions: Array<ScanPosition>) {
   const getAllies = positions.filter((sp) => {
@@ -8,7 +7,7 @@ export function AssistAllies(positions: Array<ScanPosition>) {
 
   if (getAllies && getAllies.length > 0) positions = getAllies;
 
-  return limitCoordinatesToRange(100, positions);
+  return positions;
 }
 
 export const getAssistAlliesStrategy: TargetPrioritizationStrategy = () => {

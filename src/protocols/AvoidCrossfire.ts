@@ -1,5 +1,4 @@
 import { Protocol, ScanPosition, TargetPrioritizationStrategy } from "@types";
-import { limitCoordinatesToRange } from "@utils";
 
 export function AvoidCrossfire(positions: Array<ScanPosition>) {
   const getEnemiesWithOutAllies = positions.filter((sp) => {
@@ -9,7 +8,7 @@ export function AvoidCrossfire(positions: Array<ScanPosition>) {
   if (getEnemiesWithOutAllies && getEnemiesWithOutAllies.length > 0)
     positions = getEnemiesWithOutAllies;
 
-  return limitCoordinatesToRange(100, positions);
+  return positions;
 }
 
 export const getAvoidCrossfireStrategy: TargetPrioritizationStrategy = () => {

@@ -4,7 +4,6 @@ import {
   ScanPosition,
   TargetPrioritizationStrategy,
 } from "@types";
-import { limitCoordinatesToRange } from "@utils";
 
 export function AvoidMecha(positions: Array<ScanPosition>) {
   const avoidMecha = positions.filter((sp) => {
@@ -13,7 +12,7 @@ export function AvoidMecha(positions: Array<ScanPosition>) {
 
   if (avoidMecha && avoidMecha.length > 0) positions = avoidMecha;
 
-  return limitCoordinatesToRange(100, positions);
+  return positions;
 }
 
 export const getAvoidMechaStrategy: TargetPrioritizationStrategy = () => {

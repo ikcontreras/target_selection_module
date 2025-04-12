@@ -4,7 +4,6 @@ import {
   ScanPosition,
   TargetPrioritizationStrategy,
 } from "@types";
-import { limitCoordinatesToRange } from "@utils";
 
 export function PrioritizeMecha(positions: Array<ScanPosition>) {
   const getMecha = positions.filter(
@@ -13,7 +12,7 @@ export function PrioritizeMecha(positions: Array<ScanPosition>) {
 
   if (getMecha && getMecha.length > 0) positions = getMecha;
 
-  return limitCoordinatesToRange(100, positions);
+  return positions;
 }
 
 export const getPrioritizeMechaStrategy: TargetPrioritizationStrategy = () => {

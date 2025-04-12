@@ -5,6 +5,6 @@ export const routes = [
   {
     path: "/radar",
     method: HTTP_METHODS.POST,
-    controller: RadarController,
+    controller: RadarController().targetSelection,
   },
 ];

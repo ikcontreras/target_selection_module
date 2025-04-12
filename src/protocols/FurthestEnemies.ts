@@ -1,11 +1,10 @@
 import { Protocol, ScanPosition, TargetPrioritizationStrategy } from "@types";
 import { sortEnemies } from "@utils";
-import { limitCoordinatesToRange } from "@utils";
 
 export function FurthestEnemies(positions: Array<ScanPosition>) {
   let enemiesSorted = sortEnemies(positions);
 
-  return limitCoordinatesToRange(100, enemiesSorted.reverse());
+  return enemiesSorted.reverse();
 }
 
 export const getFurthestEnemiesStrategy: TargetPrioritizationStrategy = () => {

@@ -1,8 +1,8 @@
 import { Protocol, ScanPosition, TargetPrioritizationStrategy } from "@types";
-import { limitCoordinatesToRange, sortEnemies } from "@utils";
+import { sortEnemies } from "@utils";
 
 export function ClosestEnemies(positions: Array<ScanPosition>) {
-  return limitCoordinatesToRange(100, sortEnemies(positions));
+  return sortEnemies(positions);
 }
 
 export const getClosestEnemiesStrategy: TargetPrioritizationStrategy = () => {
