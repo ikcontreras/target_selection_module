@@ -11,6 +11,8 @@
     "resolveJsonModule": true,
     "paths": {
       "@types": ["./src/types/index.ts"],
+      "@utils": ["./src/utils/index.ts"],
+      "@protocols": ["./src/protocols/index.ts"],
     }
   },
   "include": ["src"],
