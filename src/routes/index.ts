@@ -1,4 +1,4 @@
-import { RadarController } from "./controllers/RadarController";
+import { RadarController } from "@routes/controllers/RadarController";
 import { HTTP_METHODS } from "@types";
 
 export const routes = [

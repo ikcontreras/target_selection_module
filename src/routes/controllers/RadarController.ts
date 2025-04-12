@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { RadarPayload, RadarResponse } from "@types";
 import { log } from "@utils";
-import { RadarService } from "../services/RadarService";
+import { RadarService } from "@routes/services/RadarService";
 
 export function TargetSelectionController(
   req: Request<unknown, unknown, RadarPayload>,

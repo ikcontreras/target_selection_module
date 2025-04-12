@@ -16,6 +16,7 @@ esbuild
       "@types": path.resolve(__dirname, "src/types"),
       "@utils": path.resolve(__dirname, "src/utils"),
       "@protocols": path.resolve(__dirname, "src/protocols"),
+      "@routes/*": path.resolve(__dirname, "src/routes"),
     },
   })
   .then((result) => {
