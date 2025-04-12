@@ -14,11 +14,13 @@
   "description": "",
   "devDependencies": {
     "@types/express": "^5.0.1",
+    "@types/morgan": "^1.9.9",
     "esbuild": "^0.25.2",
     "tsx": "^4.19.3"
   },
   "dependencies": {
     "express": "^5.1.0",
-    "mongoose": "^8.13.2"
+    "mongoose": "^8.13.2",
+    "morgan": "^1.10.0"
   }
 }
