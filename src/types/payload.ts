@@ -10,7 +10,7 @@ type Enemies = {
   number: number;
 };
 
-export type Payload = {
+export type RadarPayload = {
   protocols: Array<Protocols>;
   scan: Array<{
     coordinates: Coordinates;
