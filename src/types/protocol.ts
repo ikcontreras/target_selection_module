@@ -1,4 +1,4 @@
-import { RadarPayload, ScanPosition } from "./payload";
+import { ScanPosition } from "./payload";
 
 export enum Protocol {
   "CLOSEST_ENEMIES" = "closest-enemies",

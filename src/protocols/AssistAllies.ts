@@ -1,6 +1,6 @@
 import { Protocol, ScanPosition, TargetPrioritizationStrategy } from "@types";
 
-export function AssistAllies(positions: Array<ScanPosition>) {
+export function executeAssistAllies(positions: Array<ScanPosition>) {
   const getAllies = positions.filter((sp) => {
     if (sp.allies) return sp.allies;
   });
@@ -13,6 +13,6 @@ export function AssistAllies(positions: Array<ScanPosition>) {
 export const getAssistAlliesStrategy: TargetPrioritizationStrategy = () => {
   return {
     condition: (protocol) => protocol === Protocol.ASSIST_ALLIES,
-    execute: AssistAllies,
+    execute: executeAssistAllies,
   };
 };

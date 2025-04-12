@@ -5,7 +5,7 @@ import {
   TargetPrioritizationStrategy,
 } from "@types";
 
-export function AvoidMecha(positions: Array<ScanPosition>) {
+export function executeAvoidMecha(positions: Array<ScanPosition>) {
   const avoidMecha = positions.filter((sp) => {
     return sp.enemies.type !== EnemiesType.MECHA;
   });
@@ -18,6 +18,6 @@ export function AvoidMecha(positions: Array<ScanPosition>) {
 export const getAvoidMechaStrategy: TargetPrioritizationStrategy = () => {
   return {
     condition: (protocol) => protocol === Protocol.AVOID_MECH,
-    execute: AvoidMecha,
+    execute: executeAvoidMecha,
   };
 };

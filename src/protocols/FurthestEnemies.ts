@@ -1,15 +1,26 @@
-import { Protocol, ScanPosition, TargetPrioritizationStrategy } from "@types";
+import {
+  EnemySorter,
+  Protocol,
+  ScanPosition,
+  TargetPrioritizationStrategy,
+} from "@types";
 import { sortEnemies } from "@utils";
 
-export function FurthestEnemies(positions: Array<ScanPosition>) {
-  let enemiesSorted = sortEnemies(positions);
+export const createExecutorFurthestEnemies = ({
+  sortEnemies,
+}: {
+  sortEnemies: EnemySorter;
+}) => {
+  return (positions: Array<ScanPosition>) => {
+    let enemiesSorted = sortEnemies(positions);
 
-  return enemiesSorted.reverse();
-}
+    return enemiesSorted.reverse();
+  };
+};
 
 export const getFurthestEnemiesStrategy: TargetPrioritizationStrategy = () => {
   return {
     condition: (protocol) => protocol === Protocol.FURTHEST_ENEMIES,
-    execute: FurthestEnemies,
+    execute: createExecutorFurthestEnemies({ sortEnemies }),
   };
 };

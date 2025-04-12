@@ -1,6 +1,6 @@
 import { Protocol, ScanPosition, TargetPrioritizationStrategy } from "@types";
 
-export function AvoidCrossfire(positions: Array<ScanPosition>) {
+export function executeAvoidCrossfire(positions: Array<ScanPosition>) {
   const getEnemiesWithOutAllies = positions.filter((sp) => {
     return !sp.allies || sp.allies === 0;
   });
@@ -14,6 +14,6 @@ export function AvoidCrossfire(positions: Array<ScanPosition>) {
 export const getAvoidCrossfireStrategy: TargetPrioritizationStrategy = () => {
   return {
     condition: (protocol) => protocol === Protocol.AVOID_CROSSFIRE,
-    execute: AvoidCrossfire,
+    execute: executeAvoidCrossfire,
   };
 };
