@@ -1,14 +1,6 @@
 import { Protocols } from "./protocols";
-
-type Coordinates = {
-  x: number;
-  y: number;
-};
-
-type Enemies = {
-  type: "soldier" | "mech";
-  number: number;
-};
+import { Enemies } from "./enemies";
+import { Coordinates } from "./coordinates";
 
 export type RadarPayload = {
   protocols: Array<Protocols>;
