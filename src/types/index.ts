@@ -1,6 +1,6 @@
 export * from "./coordinates";
 export * from "./enemies";
 export * from "./payload";
-export * from "./protocols";
+export * from "./protocol";
 export * from "./response";
 export * from "./routes";

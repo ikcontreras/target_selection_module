@@ -1,7 +1,6 @@
-import { RadarPayload } from "./payload";
-import { Coordinates } from "./coordinates";
+import { RadarPayload, ScanPosition } from "./payload";
 
-export enum Protocols {
+export enum Protocol {
   "CLOSEST_ENEMIES" = "closest-enemies",
   "FURTHEST_ENEMIES" = "furthest-enemies",
   "ASSIST_ALLIES" = "assist-allies",
@@ -11,6 +10,6 @@ export enum Protocols {
 }
 
 export type TargetPrioritizationStrategy = () => {
-  condition: (radar: RadarPayload) => boolean;
-  execute: (radar: RadarPayload) => Coordinates;
+  condition: (protocol: Protocol) => boolean;
+  execute: (positions: Array<ScanPosition>) => Array<ScanPosition>;
 };
