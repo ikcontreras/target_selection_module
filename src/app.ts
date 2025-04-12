@@ -1,7 +1,7 @@
 import express, { NextFunction, Response, Request } from "express";
 import morgan from "morgan";
 import dotenv from "dotenv";
-import { log } from "./utils/logger";
+import { log } from "@utils";
 import { routes } from "./routes";
 
 dotenv.config();
