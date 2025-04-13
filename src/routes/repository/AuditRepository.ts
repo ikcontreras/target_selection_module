@@ -16,6 +16,7 @@ export type AuditRepository = {
     outOfRangeEnemies: Array<ScanPosition>,
   ) => void;
   getAudits: () => Promise<Audit[]>;
+  getAuditById: (id: string) => Promise<Audit | null>;
 };
 
 export const createAuditRepository: RepositoryFactory<
@@ -50,6 +51,9 @@ export const createAuditRepository: RepositoryFactory<
 
     getAudits() {
       return auditModel.find().exec();
+    },
+    getAuditById(id: string) {
+      return auditModel.findById({ _id: id }).exec();
     },
   };
 };

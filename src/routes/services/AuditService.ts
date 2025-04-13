@@ -4,6 +4,7 @@ import { Audit } from "@routes/models/AuditModel";
 
 export type AuditService = {
   getAudits: () => Promise<Audit[]>;
+  getAuditById: (id: string) => Promise<Audit | null>;
 };
 
 type Repositories = {
@@ -16,6 +17,9 @@ export const createAuditService: ServiceFactory<Repositories, AuditService> = ({
   return {
     getAudits() {
       return auditRepository.getAudits();
+    },
+    getAuditById(id: string) {
+      return auditRepository.getAuditById(id);
     },
   };
 };

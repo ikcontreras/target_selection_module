@@ -4,6 +4,7 @@ import { AuditService } from "@routes/services/AuditService";
 
 export type AuditController = {
   list: (req: Request, res: Response) => void;
+  read: (req: Request, res: Response) => void;
 };
 
 type Services = {
@@ -22,6 +23,21 @@ export const createAuditController: ControllerFactory<
         success: true,
         result: audits,
       });
+    },
+    read: async (req: Request, res: Response) => {
+      const audit = await auditService.getAuditById(req.params.id);
+
+      if (!audit) {
+        res.send({
+          success: false,
+          message: "Audit not found",
+        });
+      } else {
+        res.send({
+          success: true,
+          result: audit,
+        });
+      }
     },
   };
 };

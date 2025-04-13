@@ -25,4 +25,13 @@ export const routes: Route[] = [
       }),
     }).list,
   },
+  {
+    path: "/audit/:id",
+    method: HTTP_METHODS.GET,
+    controller: createAuditController({
+      auditService: createAuditService({
+        auditRepository: createAuditRepository(AuditModel),
+      }),
+    }).read,
+  },
 ];
