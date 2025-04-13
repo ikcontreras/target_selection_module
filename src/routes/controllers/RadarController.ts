@@ -13,13 +13,7 @@ export function RadarController({
       req: Request<unknown, unknown, RadarPayload>,
       res: Response<RadarResponse>,
     ) => {
-      log.info("Initializing communication protocol...");
-
       const positions = RadarService().getCoordinates(req.body);
-
-      log.info(
-        `Target selected at (${positions.coordinates.x}, ${positions.coordinates.y}).`,
-      );
 
       res.send({
         x: positions.coordinates.x,
