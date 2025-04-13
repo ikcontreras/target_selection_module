@@ -34,4 +34,13 @@ export const routes: Route[] = [
       }),
     }).read,
   },
+  {
+    path: "/audit/:id",
+    method: HTTP_METHODS.DELETE,
+    controller: createAuditController({
+      auditService: createAuditService({
+        auditRepository: createAuditRepository(AuditModel),
+      }),
+    }).delete,
+  },
 ];

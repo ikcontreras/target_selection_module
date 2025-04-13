@@ -5,6 +5,7 @@ import { AuditService } from "@routes/services/AuditService";
 export type AuditController = {
   list: (req: Request, res: Response) => void;
   read: (req: Request, res: Response) => void;
+  delete: (req: Request, res: Response) => void;
 };
 
 type Services = {
@@ -36,6 +37,21 @@ export const createAuditController: ControllerFactory<
         res.send({
           success: true,
           result: audit,
+        });
+      }
+    },
+    delete: async (req: Request, res: Response) => {
+      const audit = await auditService.deleteAuditById(req.params.id);
+
+      if (!audit) {
+        res.send({
+          success: false,
+          message: "Audit not found",
+        });
+      } else {
+        res.send({
+          success: true,
+          message: "Audit deleted",
         });
       }
     },

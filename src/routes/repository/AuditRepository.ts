@@ -4,7 +4,7 @@ import {
   RepositoryFactory,
   ScanPosition,
 } from "@types";
-import { Model } from "mongoose";
+import { DeleteResult, Model } from "mongoose";
 import { log } from "@utils";
 import { Audit, Strategy } from "@routes/models/AuditModel";
 
@@ -17,6 +17,7 @@ export type AuditRepository = {
   ) => void;
   getAudits: () => Promise<Audit[]>;
   getAuditById: (id: string) => Promise<Audit | null>;
+  deleteAuditById: (id: string) => Promise<DeleteResult | null>;
 };
 
 export const createAuditRepository: RepositoryFactory<
@@ -54,6 +55,9 @@ export const createAuditRepository: RepositoryFactory<
     },
     getAuditById(id: string) {
       return auditModel.findById({ _id: id }).exec();
+    },
+    deleteAuditById(id: string) {
+      return auditModel.deleteOne({ _id: id }).exec();
     },
   };
 };
