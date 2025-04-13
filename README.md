@@ -349,6 +349,32 @@ This endpoint returns a JSON object with the following properties:
 - `success`: a boolean representing whether the audit record was deleted successfully.
 - `message`: a string representing the message indicating whether the audit record was deleted successfully.
 
+# Audit Scripts for Local API
+
+These scripts interact with a local API running at `http://localhost:8888`. Make sure the server is up before executing them.
+
+
+### 1. `audit_all.sh`
+Fetches all registered audit entries.
+
+```bash
+./scripts/audit_all.sh
+```
+
+### 2. `audit_by_id.sh`
+Fetches a specific audit entry by its ID.
+
+```bash
+./scripts/audit_by_id.sh <audit_id>
+```
+
+### 3. `delete_audit.sh`
+Deletes a specific audit entry by its ID.
+
+```bash
+./scripts/delete_audit.sh <audit_id>
+```
+
 ## 🌌 Final Transmission
 
 The Target Selection Module has been successfully completed and is ready for integration with the YVH combat droid system.
