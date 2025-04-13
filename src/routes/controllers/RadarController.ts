@@ -8,11 +8,10 @@ type RadarController = {
 
 type Services = { radarService: RadarService };
 
-export const RadarController: ControllerFactory<Services, RadarController> = ({
-  radarService,
-}: {
-  radarService: RadarService;
-}) => {
+export const createRadarController: ControllerFactory<
+  Services,
+  RadarController
+> = ({ radarService }: { radarService: RadarService }) => {
   return {
     targetSelection: (
       req: Request<unknown, unknown, RadarPayload>,

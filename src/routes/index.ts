@@ -1,4 +1,4 @@
-import { RadarController } from "@routes/controllers/RadarController";
+import { createRadarController } from "@routes/controllers/RadarController";
 import { HTTP_METHODS, Route } from "@types";
 import { createRadarService } from "@routes/services/RadarService";
 import { createAuditRepository } from "@routes/repository/AuditRepository";
@@ -8,7 +8,7 @@ export const routes: Route[] = [
   {
     path: "/radar",
     method: HTTP_METHODS.POST,
-    controller: RadarController({
+    controller: createRadarController({
       radarService: createRadarService({
         auditRepository: createAuditRepository(AuditModel),
       }),
