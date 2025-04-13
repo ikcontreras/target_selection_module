@@ -1,13 +1,14 @@
 import { Coordinates, RadarPayload, RepositoryFactory } from "@types";
 import { Model } from "mongoose";
 import { log } from "@utils";
+import { Audit } from "@routes/models/AuditModel";
 
 export type AuditRepository = {
   save: (payload: RadarPayload, response: Coordinates) => void;
 };
 
 export const createAuditRepository: RepositoryFactory<
-  Model<any>,
+  Model<Audit>,
   AuditRepository
 > = (auditModel) => {
   return {

@@ -1,7 +1,17 @@
-import { model, Schema } from "mongoose";
+import { Model, model, Schema } from "mongoose";
 import { Protocol, ScanPosition } from "@types";
 
-const AuditSchema = new Schema({
+export interface Audit extends Document {
+  date: Date;
+  protocols: Protocol[];
+  scanner: ScanPosition[];
+  target: {
+    x: number;
+    y: number;
+  };
+}
+
+const AuditSchema = new Schema<Audit>({
   date: Date,
   protocols: Array<Protocol>,
   scanner: Array<ScanPosition>,
@@ -11,4 +21,4 @@ const AuditSchema = new Schema({
   },
 });
 
-export const AuditModel = model("Audit", AuditSchema);
+export const AuditModel: Model<Audit> = model<Audit>("Audit", AuditSchema);
