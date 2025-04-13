@@ -1,8 +1,8 @@
-import { RadarPayload } from "@types";
+import { RadarPayload, RadarService } from "@types";
 import { limitCoordinatesToRange, log } from "@utils";
 import { protocolStrategies } from "@protocols";
 
-export function RadarService() {
+export const createRadarService: RadarService = () => {
   return {
     getCoordinates(radar: RadarPayload) {
       let positions = limitCoordinatesToRange(100, radar.scan);
@@ -18,4 +18,4 @@ export function RadarService() {
       return positions[0];
     },
   };
-}
+};
