@@ -15,6 +15,10 @@ const format =
 
 const port = process.env.PORT || 8888;
 
+const mongoConnection =
+  process.env.MONGO_CONNECTION ||
+  "mongodb://localhost:27017/yvh-target-selection-module";
+
 app.use(express.json());
 
 app.use(morgan(format));
@@ -42,9 +46,7 @@ app.listen(port, async () => {
   log.info("Loading target prioritization algorithm...");
   log.info("Initializing communication protocol...");
   try {
-    await mongoose.connect(
-      "mongodb://localhost:27017/yvh-target-selection-module",
-    );
+    await mongoose.connect(mongoConnection);
     log.info(
       "Connection established with the Advanced Defense Droid Data Base. (MongoDB)",
     );
