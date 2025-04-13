@@ -3,6 +3,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import { log } from "@utils";
 import { routes } from "./routes";
+import mongoose from "mongoose";
 
 dotenv.config();
 
@@ -36,14 +37,23 @@ app.use(function (req, res) {
   res.send({ error: "Not found" });
 });
 
-app.listen(port, () => {
+app.listen(port, async () => {
   log.info("Initializing YVH target selection module...");
-  log.info("Connection established with the Advanced Defense Droid Network.");
-  log.info(
-    "Synchronizing with the New Republic Tactical Intelligence System...",
-  );
   log.info("Loading target prioritization algorithm...");
   log.info("Initializing communication protocol...");
+  try {
+    await mongoose.connect(
+      "mongodb://localhost:27017/yvh-target-selection-module",
+    );
+    log.info(
+      "Connection established with the Advanced Defense Droid Data Base. (MongoDB)",
+    );
+  } catch (err) {
+    log.error(
+      "Error connecting with the Advanced Defense Droid Data Base. (MongoDB)",
+    );
+  }
+
   log.info("Integration with audit system completed.");
   log.info("YVH tactical system ready to identify and eliminate threats.");
   log.info(`YVH target selection module is live on port ${port}.`);

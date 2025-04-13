@@ -1,8 +1,19 @@
-import { RadarPayload, RadarService } from "@types";
+import { RadarPayload, ScanPosition, ServiceFactory } from "@types";
 import { limitCoordinatesToRange, log } from "@utils";
+import { AuditRepository } from "@routes/repository/AuditRepository";
 import { protocolStrategies } from "@protocols";
 
-export const createRadarService: RadarService = () => {
+export type RadarService = {
+  getCoordinates: (radar: RadarPayload) => ScanPosition;
+};
+
+type Repositories = {
+  auditRepository: AuditRepository;
+};
+
+export const createRadarService: ServiceFactory<Repositories, RadarService> = ({
+  auditRepository,
+}) => {
   return {
     getCoordinates(radar: RadarPayload) {
       log.info("Loading target prioritization algorithm...");
@@ -27,6 +38,7 @@ export const createRadarService: RadarService = () => {
         `Target selected at (${positions[0].coordinates.x}, ${positions[0].coordinates.y}).`,
       );
 
+      auditRepository.save(radar, positions[0].coordinates);
       return positions[0];
     },
   };

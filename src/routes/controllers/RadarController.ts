@@ -1,19 +1,24 @@
 import { Request, Response } from "express";
-import { RadarPayload, RadarResponse } from "@types";
-import { log } from "@utils";
-import { RadarService } from "@types";
+import { ControllerFactory, RadarPayload, RadarResponse } from "@types";
+import { RadarService } from "@routes/services/RadarService";
 
-export function RadarController({
-  RadarService,
+type RadarController = {
+  targetSelection: (req: Request, res: Response) => void;
+};
+
+type Services = { radarService: RadarService };
+
+export const RadarController: ControllerFactory<Services, RadarController> = ({
+  radarService,
 }: {
-  RadarService: RadarService;
-}) {
+  radarService: RadarService;
+}) => {
   return {
     targetSelection: (
       req: Request<unknown, unknown, RadarPayload>,
       res: Response<RadarResponse>,
     ) => {
-      const positions = RadarService().getCoordinates(req.body);
+      const positions = radarService.getCoordinates(req.body);
 
       res.send({
         x: positions.coordinates.x,
@@ -21,4 +26,4 @@ export function RadarController({
       });
     },
   };
-}
+};

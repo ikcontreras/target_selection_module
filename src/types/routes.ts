@@ -1,5 +1,4 @@
 import { RequestHandler } from "express";
-import { RadarPayload, ScanPosition } from "./payload";
 
 export enum HTTP_METHODS {
   POST = "post",
@@ -14,6 +13,12 @@ export type Route = {
   controller: RequestHandler;
 };
 
-export type RadarService = () => {
-  getCoordinates: (radar: RadarPayload) => ScanPosition;
-};
+export type ControllerFactory<Services, Controller> = (
+  services: Services,
+) => Controller;
+
+export type ServiceFactory<Repositories, Service> = (
+  repositories: Repositories,
+) => Service;
+
+export type RepositoryFactory<Model, Repository> = (model: Model) => Repository;
