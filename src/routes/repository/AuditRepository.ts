@@ -1,10 +1,20 @@
-import { Coordinates, RadarPayload, RepositoryFactory } from "@types";
+import {
+  Coordinates,
+  RadarPayload,
+  RepositoryFactory,
+  ScanPosition,
+} from "@types";
 import { Model } from "mongoose";
 import { log } from "@utils";
-import { Audit } from "@routes/models/AuditModel";
+import { Audit, Strategy } from "@routes/models/AuditModel";
 
 export type AuditRepository = {
-  save: (payload: RadarPayload, response: Coordinates) => void;
+  save: (
+    payload: RadarPayload,
+    target: Coordinates | null,
+    strategies: Array<Strategy>,
+    outOfRangeEnemies: Array<ScanPosition>,
+  ) => void;
   getAudits: () => Promise<Audit[]>;
 };
 
@@ -13,21 +23,31 @@ export const createAuditRepository: RepositoryFactory<
   AuditRepository
 > = (auditModel) => {
   return {
-    save(payload: RadarPayload, response: Coordinates) {
+    save(
+      payload: RadarPayload,
+      target: Coordinates | null,
+      strategies: Array<Strategy>,
+      outOfRangeEnemies: Array<ScanPosition>,
+    ) {
       new auditModel({
         date: new Date(),
         protocols: payload.protocols,
         scanner: payload.scan,
-        target: {
-          x: response.x,
-          y: response.y,
-        },
+        outOfRangeEnemies,
+        strategies,
+        target: target
+          ? {
+              x: target.x,
+              y: target.y,
+            }
+          : null,
       })
         .save()
         .catch((err: any) => {
           log.error(`Error saving audit record: ${err}`);
         });
     },
+
     getAudits() {
       return auditModel.find().exec();
     },

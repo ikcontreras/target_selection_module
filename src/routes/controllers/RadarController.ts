@@ -19,10 +19,14 @@ export const createRadarController: ControllerFactory<
     ) => {
       const positions = radarService.getCoordinates(req.body);
 
-      res.send({
-        x: positions.coordinates.x,
-        y: positions.coordinates.y,
-      });
+      if (positions) {
+        res.send({
+          x: positions.x,
+          y: positions.y,
+        });
+      } else {
+        res.send();
+      }
     },
   };
 };
