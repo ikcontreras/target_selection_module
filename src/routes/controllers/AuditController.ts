@@ -29,6 +29,7 @@ export const createAuditController: ControllerFactory<
       const audit = await auditService.getAuditById(req.params.id);
 
       if (!audit) {
+        res.status(404);
         res.send({
           success: false,
           message: "Audit not found",
