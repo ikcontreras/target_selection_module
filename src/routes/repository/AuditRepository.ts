@@ -5,6 +5,7 @@ import { Audit } from "@routes/models/AuditModel";
 
 export type AuditRepository = {
   save: (payload: RadarPayload, response: Coordinates) => void;
+  getAudits: () => Promise<Audit[]>;
 };
 
 export const createAuditRepository: RepositoryFactory<
@@ -26,6 +27,9 @@ export const createAuditRepository: RepositoryFactory<
         .catch((err: any) => {
           log.error(`Error saving audit record: ${err}`);
         });
+    },
+    getAudits() {
+      return auditModel.find().exec();
     },
   };
 };
