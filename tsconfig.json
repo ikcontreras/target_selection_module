@@ -13,9 +13,10 @@
       "@types": ["./src/types/index.ts"],
       "@utils": ["./src/utils/index.ts"],
       "@protocols": ["./src/protocols/index.ts"],
+      "@protocol/*": ["./src/protocols/*"],
       "@routes/*": ["./src/routes/*"],
     }
   },
-  "include": ["src"],
+  "include": ["src", "tests"],
   "exclude": ["node_modules", "dist"]
 }
