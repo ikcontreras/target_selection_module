@@ -10,9 +10,14 @@ export function executeAssistAllies(positions: Array<ScanPosition>) {
   return positions;
 }
 
-export const getAssistAlliesStrategy: TargetPrioritizationStrategy = () => {
-  return {
-    condition: (protocol) => protocol === Protocol.ASSIST_ALLIES,
-    execute: executeAssistAllies,
+export function isProtocolAssistAllies(protocol: Protocol) {
+  return protocol === Protocol.ASSIST_ALLIES;
+}
+
+export const createStrategyForAssistAllies: TargetPrioritizationStrategy =
+  () => {
+    return {
+      condition: isProtocolAssistAllies,
+      execute: executeAssistAllies,
+    };
   };
-};

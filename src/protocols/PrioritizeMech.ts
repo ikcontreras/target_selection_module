@@ -15,9 +15,14 @@ export function executePrioritizeMecha(positions: Array<ScanPosition>) {
   return positions;
 }
 
-export const getPrioritizeMechaStrategy: TargetPrioritizationStrategy = () => {
-  return {
-    condition: (protocol) => protocol === Protocol.PRIORITIZE_MECH,
-    execute: executePrioritizeMecha,
+export function isProtocolPrioritizeMecha(protocol: Protocol) {
+  return protocol === Protocol.PRIORITIZE_MECH;
+}
+
+export const createStrategyForPrioritizeMecha: TargetPrioritizationStrategy =
+  () => {
+    return {
+      condition: isProtocolPrioritizeMecha,
+      execute: executePrioritizeMecha,
+    };
   };
-};

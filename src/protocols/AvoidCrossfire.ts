@@ -11,9 +11,14 @@ export function executeAvoidCrossfire(positions: Array<ScanPosition>) {
   return positions;
 }
 
-export const getAvoidCrossfireStrategy: TargetPrioritizationStrategy = () => {
-  return {
-    condition: (protocol) => protocol === Protocol.AVOID_CROSSFIRE,
-    execute: executeAvoidCrossfire,
+export function isProtocolAvoidCrossfire(protocol: Protocol) {
+  return protocol === Protocol.AVOID_CROSSFIRE;
+}
+
+export const createStrategyForAvoidCrossfire: TargetPrioritizationStrategy =
+  () => {
+    return {
+      condition: isProtocolAvoidCrossfire,
+      execute: executeAvoidCrossfire,
+    };
   };
-};

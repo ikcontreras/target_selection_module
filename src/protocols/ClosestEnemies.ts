@@ -16,9 +16,14 @@ export const createExecutorClosestEnemies = ({
   };
 };
 
-export const getClosestEnemiesStrategy: TargetPrioritizationStrategy = () => {
-  return {
-    condition: (protocol) => protocol === Protocol.CLOSEST_ENEMIES,
-    execute: createExecutorClosestEnemies({ sortEnemies }),
+export function isProtocolClosestEnemies(protocol: Protocol) {
+  return protocol === Protocol.CLOSEST_ENEMIES;
+}
+
+export const createStrategyForClosestEnemies: TargetPrioritizationStrategy =
+  () => {
+    return {
+      condition: isProtocolClosestEnemies,
+      execute: createExecutorClosestEnemies({ sortEnemies }),
+    };
   };
-};

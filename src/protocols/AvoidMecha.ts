@@ -15,9 +15,13 @@ export function executeAvoidMecha(positions: Array<ScanPosition>) {
   return positions;
 }
 
-export const getAvoidMechaStrategy: TargetPrioritizationStrategy = () => {
+export function isProtocolAvoidMecha(protocol: Protocol) {
+  return protocol === Protocol.AVOID_MECH;
+}
+
+export const createStrategyForAvoidMecha: TargetPrioritizationStrategy = () => {
   return {
-    condition: (protocol) => protocol === Protocol.AVOID_MECH,
+    condition: isProtocolAvoidMecha,
     execute: executeAvoidMecha,
   };
 };

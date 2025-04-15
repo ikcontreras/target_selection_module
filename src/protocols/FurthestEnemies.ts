@@ -18,9 +18,14 @@ export const createExecutorFurthestEnemies = ({
   };
 };
 
-export const getFurthestEnemiesStrategy: TargetPrioritizationStrategy = () => {
-  return {
-    condition: (protocol) => protocol === Protocol.FURTHEST_ENEMIES,
-    execute: createExecutorFurthestEnemies({ sortEnemies }),
+export function isProtocolFurthestEnemies(protocol: Protocol) {
+  return protocol === Protocol.FURTHEST_ENEMIES;
+}
+
+export const createStrategyForFurthestEnemies: TargetPrioritizationStrategy =
+  () => {
+    return {
+      condition: isProtocolFurthestEnemies,
+      execute: createExecutorFurthestEnemies({ sortEnemies }),
+    };
   };
-};
